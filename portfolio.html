@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body.light {
+      background: #f9f9f9;
+      color: #333;
+    }
+
+    body.dark {
+      background: #121212;
+      color: #eee;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      position: sticky;
+      top: 0;
+      background: inherit;
+      z-index: 1000;
+    }
+
+    nav a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: inherit;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .theme-toggle {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #projects .project-card {
+      display: inline-block;
+      width: 250px;
+      margin: 15px;
+      padding: 20px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+    }
+
+    body.light #projects .project-card {
+      background: #fff;
+    }
+
+    #projects .project-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      margin: auto;
+    }
+
+    form input, form textarea {
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    form button {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      background: #007BFF;
+      color: #fff;
+      cursor: pointer;
+    }
+
+  </style>
+</head>
+<body class="light">
+  <header>
+    <h1>My Portfolio</h1>
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="theme-toggle">🌙</button>
+  </header>
+
+  <section id="hero">
+    <h2>Hello, I'm <span style="color:#007BFF;">Siddharth Bharti</span></h2>
+    <p>Aspiring Software Developer | Problem Solver | Tech Enthusiast</p>
+    <a href="resume.pdf" download>
+      <button style="margin-top:20px; padding:10px 20px; border:none; border-radius:5px; background:#28a745; color:#fff; cursor:pointer;">Download Resume</button>
+    </a>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Short bio about your skills, education, and interests.</p>
+  </section>
+
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="project-card">
+      <h3>Project 1</h3>
+      <p>Description of project 1.</p>
+    </div>
+    <div class="project-card">
+      <h3>Project 2</h3>
+      <p>Description of project 2.</p>
+    </div>
+    <div class="project-card">
+      <h3>Project 3</h3>
+      <p>Description of project 3.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Me</h2>
+    <form action="https://formspree.io/f/your-form-id" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Siddharth Bharti. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Theme toggle with persistence
+    const body = document.body;
+    const themeToggle = document.querySelector('.theme-toggle');
+
+    if(localStorage.getItem('theme')) {
+      body.className = localStorage.getItem('theme');
+      themeToggle.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      body.classList.toggle('light');
+      const theme = body.classList.contains('dark') ? 'dark' : 'light';
+      localStorage.setItem('theme', theme);
+      themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
